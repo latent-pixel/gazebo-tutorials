@@ -59,10 +59,10 @@ auto WalkerNode::next_move(float distance) -> geometry_msgs::msg::Twist {
   auto msg = geometry_msgs::msg::Twist();
   // logic
   RCLCPP_INFO(this->get_logger(), "Distance is: '%f'", distance);
-  if (distance < 0.4) {
+  if (distance < 0.5) {
     // turn around
     msg.linear.x = 0;
-    msg.angular.z = 0.2;
+    msg.angular.z = 0.8;
   } else {
     // go straight ahead
     msg.linear.x = 0.2;

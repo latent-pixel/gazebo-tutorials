@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find-pkg-share turtlebot3_gazebo)/launch/turtlebot3_world.launch.py">
+  </include>
+  <node pkg="simple_walker" exec="walker" name="roomba_node"/>
+  <executable cmd="ros2 bag record /clock /cmd_vel /imu /joint_states /odom /parameter_events /performance_metrics /robot_description /rosout /scan /tf /tf_static" output="screen" if="$(var record)"/>
+</launch>
