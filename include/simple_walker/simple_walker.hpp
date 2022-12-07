@@ -28,22 +28,40 @@
  *
  */
 
-#ifndef SIMPLE_WALKER_HPP
-#define SIMPLE_WALKER_HPP
+#ifndef INCLUDE_SIMPLE_WALKER_SIMPLE_WALKER_HPP_
+#define INCLUDE_SIMPLE_WALKER_SIMPLE_WALKER_HPP_
 
-#include "geometry_msgs/msg/twist.hpp"     // Twist
+#include <string>
+#include "geometry_msgs/msg/twist.hpp"     // for Twist messages
 #include "rclcpp/rclcpp.hpp"               // ROS Core Libraries
-#include "sensor_msgs/msg/laser_scan.hpp"  // Laser Scan
-
+#include "sensor_msgs/msg/laser_scan.hpp"  // for Laser Scan messages
 
 class WalkerNode : public rclcpp::Node {
-    public:
-    WalkerNode(const std::string &node_name);
+ public:
+  /**
+   * @brief Construct a new Walker Node object
+   *
+   * @param node_name Name of the node
+   */
+  explicit WalkerNode(const std::string &node_name);
 
-    private:
-    void topic_callback(const sensor_msgs::msg::LaserScan::SharedPtr _msg);
-    auto next_move(float distance) -> geometry_msgs::msg::Twist;
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
-    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscription_;
+ private:
+  /**
+   * @brief Callback to the laser scan
+   *
+   * @param _msg Laser scan message pointer
+   */
+  void topic_callback(const sensor_msgs::msg::LaserScan::SharedPtr _msg);
+  /**
+   * @brief Determines the next move for the robot: twist or follow the line!
+   *
+   * @param distance Distance from an obstacle
+   * @return geometry_msgs::msg::Twist Next move
+   */
+  auto next_move(float distance) -> geometry_msgs::msg::Twist;
+  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr
+      publisher_;  // pointer to a publisher
+  rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr
+      subscription_;  // pointer to a subscription
 };
-#endif
+#endif  // INCLUDE_SIMPLE_WALKER_SIMPLE_WALKER_HPP_
