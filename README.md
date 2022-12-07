@@ -39,7 +39,7 @@ rosdep install -i --from-path src --rosdistro foxy -y
 Build the package:
 ```
 cd ..
-colcon build --packages-select cpp_pubsub
+colcon build --packages-select simple_walker
 ```
 
 ## **Running the package**
@@ -73,3 +73,6 @@ ros2 bag play <rosbag_file>
 ```
 * `_launch.py`: Runs a publisher and subsriber with the given message
 * `_launch_bag.py`: Inherits the functionality of `_launch.py` and adds the option to record rosbags
+
+## **Sample Output**
+![](results/output.gif)
